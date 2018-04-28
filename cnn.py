@@ -6,6 +6,8 @@ from keras.utils import np_utils
 from keras.datasets import mnist
 from keras import backend as K
 from matplotlib import pyplot as plt
+#Tutorial followed https://elitedatascience.com/keras-tutorial-deep-learning-in-python
+
 
 K.set_image_dim_ordering('th')
 
@@ -69,3 +71,15 @@ model.add(Flatten())
 model.add(Dense(128, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(10, activation='softmax'))
+
+#Compile model
+model.compile(loss='categorical_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])
+
+#Fit Keras model
+model.fit(X_train, Y_train, batch_size=32, epochs=10, verbose=1)
+
+#Evaluate on the test data
+score = model.evaluate(X_test,Y_test,verbose=0)
+print score
